@@ -1,0 +1,44 @@
+/* Enable IR-receiver on PWM3 */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "rockchip,rk3566-odroid-m1";
+
+	fragment@0 {
+		target-path = "/";
+
+		__overlay__ {
+
+			ir-receiver {
+				compatible = "gpio-ir-receiver";
+				pinctrl-names = "default";
+				pinctrl-0 = <&pwm3_pins>;
+				gpios = <&gpio0 18 1>;
+				status = "okay";
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&pinctrl>;
+
+		__overlay__ {
+			pwm3 {
+				pwm3_pins: pwm3-pins {
+					rockchip,pins = <0 18 1 &pcfg_pull_up>;
+				};
+			};
+		};
+	};
+
+	__symbols__ {
+		ir-receiver = "/fragment@0/__overlay__/ir-receiver";
+	};
+
+	__fixups__ {
+		gpio0 = "/fragment@0/__overlay__/ir-receiver:gpios:0";
+		pcfg_pull_up = "/fragment@1/__overlay__/pwm3/pwm3-pins:rockchip,pins:12";
+	};
+};
