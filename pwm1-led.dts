@@ -1,0 +1,33 @@
+/* Enable PWM controlled GPIO LED connected to pin 33 (needs pwm1 overlay) */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "rockchip,rk3566-odroid-m1";
+
+	fragment@0 {
+		target-path = "/";
+
+		__overlay__ {
+
+			pwm-leds {
+				compatible = "pwm-leds";
+				ext40-33 {
+					label = "ext40-33:green";
+					pwms = <&pwm1 0 65536 0>;
+					max-brightness = <255>;
+				};
+			};
+		};
+	};
+
+	__symbols__ {
+		pwm-leds = "/fragment@0/__overlay__/pwm-leds";
+	};
+
+
+	__fixups__ {
+		pwm1 = "/fragment@0/__overlay__/pwm-leds/ext40-33:pwms:0";
+	};
+};

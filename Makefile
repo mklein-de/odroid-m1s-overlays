@@ -1,4 +1,4 @@
-OVERLAYS=ir-receiver
+OVERLAYS=ir-receiver simple-led pwm1-led
 
 DTBO=$(foreach o,$(OVERLAYS),$(o).dtbo)
 
