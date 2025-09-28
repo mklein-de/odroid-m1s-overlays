@@ -1,4 +1,4 @@
-/* Enable GPIO LED connected to pin 33 */
+/* Enable GPIO LED connected to pin 12 */
 
 /dts-v1/;
 /plugin/;
@@ -12,19 +12,15 @@
 		__overlay__ {
 			leds {
 				gpio-led {
-					label = "ext40-33:green";
-					gpios = <&gpio0 13 0>;
-					linux,default-trigger = "rc-feedback";
+					label = "relay:mains";
+					gpios = <&gpio2 7 0>;
+					linux,default-trigger = "none";
 				};
 			};
 		};
 	};
 
-	__symbols__ {
-		ir-receiver = "/fragment@0/__overlay__/leds/gpio-led";
-	};
-
 	__fixups__ {
-		gpio0 = "/fragment@0/__overlay__/leds/gpio-led:gpios:0";
+		gpio2 = "/fragment@0/__overlay__/leds/gpio-led:gpios:0";
 	};
 };
