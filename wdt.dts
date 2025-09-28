@@ -1,0 +1,8 @@
+/* Enable hardware watchdog */
+
+/dts-v1/;
+/plugin/;
+
+&wdt {
+	status = "okay";
+};
