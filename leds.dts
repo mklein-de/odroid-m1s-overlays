@@ -1,0 +1,26 @@
+/* configure onboard LEDs */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "rockchip,rk3566-odroid-m1";
+
+	fragment@0 {
+		target-path = "/";
+
+		__overlay__ {
+			leds {
+				blue {
+					linux,default-trigger = "none";
+					function = "none";
+				};
+
+				red {
+					linux,default-trigger = "rc-feedback";
+					function = "rc-feedback";
+				};
+			};
+		};
+	};
+};
